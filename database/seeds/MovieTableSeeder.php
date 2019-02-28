@@ -2,13 +2,12 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\User;
+use App\Movie;
 
-class UsersTableSeeder extends Seeder
+class MovieTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(User::class, 10)->create();
+        factory(Movie::class, 10)->create();
     }
-
 }
