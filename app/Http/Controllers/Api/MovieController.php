@@ -12,9 +12,11 @@ class MovieController extends Controller
         $this->middleware('auth:api');
     }
     
-    public function index()
+    public function index(Request $request)
     {
-        return Movie::paginate(10);
+        $title = $request->input('title');
+        
+        return Movie::search($title);
     }
 
     public function store(Request $request)
