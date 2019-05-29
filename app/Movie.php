@@ -16,6 +16,7 @@ class Movie extends Model
         if ($searchTerm) {
             $query->where('title','like','%'.$searchTerm.'%');  
         }
+
         return response()->json([
             'movies' => $query->paginate(3)
         ]);
