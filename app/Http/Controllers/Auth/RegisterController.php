@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Response;
-use Exception;
-
 
 class RegisterController extends Controller
 {
@@ -25,7 +23,6 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
    
     protected $redirectTo = '/home';
 
@@ -45,12 +42,12 @@ class RegisterController extends Controller
 
     protected function create()
     {
-        $validator = $this->validator(
-            ['name' =>request('name'),
-             'email' =>request('email'),
-             'password' =>request('password'),
-             'password_confirmation'=>request('password_confirmation')
-             ]);
+        $validator = $this->validator([
+             'name' => request('name'),
+             'email' => request('email'),
+             'password' => request('password'),
+             'password_confirmation' => request('password_confirmation')
+        ]);
 
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()],422);
