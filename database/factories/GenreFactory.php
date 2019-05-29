@@ -13,13 +13,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Movie::class, function (Faker $faker) {
+$factory->define(App\Genre::class, function (Faker $faker) {
+    $genres = ['drama','comedy','triller','action','horor'];
     return [
-        'title' => $faker->words(2, true),
-        'description' => $faker->paragraph(10, true),
-        'image_url' => $faker->imageUrl(640, 480),
-        'genre_id' => function() {
-            return App\Genre::all()->random()->id;
-        }
+        'name' => $faker->randomElement($genres)     
     ];
 });

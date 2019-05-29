@@ -14,7 +14,7 @@ class MovieController extends Controller
     
     public function index()
     {
-        return Movie::all();
+        return Movie::paginate(10);
     }
 
     public function store(Request $request)
@@ -24,7 +24,7 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        //
+        return Movie::with(['genre'])->findOrFail($id);
     }
 
     public function update(Request $request, $id)
