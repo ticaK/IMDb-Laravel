@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
 
 class AuthController extends Controller
 {
@@ -22,13 +25,29 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'email' => ['required', 'email', 'max:255'],
+            'password' => ['required']
+        ]);
+    }
+    public function login(Request $request)
+    {
+        $validator = $this->validator([
+            'email' => request('email'),
+            'password' => request('password'),
+       ]);
+
+       if ($validator->fails()) {
+           return response()->json(['error' => $validator->errors()],422);
+       }
+
+       $credentials = $request->only(['email', 'password']);
+       if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['badCredError' => 'Bad credentials'], 401);
+       }
 
         return $this->respondWithToken($token);
     }
