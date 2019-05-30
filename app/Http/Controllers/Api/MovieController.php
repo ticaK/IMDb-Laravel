@@ -31,7 +31,10 @@ class MovieController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+        $movie->update($request->all());
+        
+        return $movie;
     }
 
     public function destroy($id)
