@@ -18,7 +18,7 @@ class Movie extends Model
         }
 
         return response()->json([
-            'movies' => $query->paginate(3)
+            'movies' => $query->paginate(10)
         ]);
     }
 }
