@@ -30,9 +30,9 @@ class AlterMoviesTableAddGenreIdField extends Migration
      */
     public function down()
     {
-        Schema::table('movies', function (Blueprint $table) {
-            $table->dropForeign(['genre_id']);
-            $table->dropColumn('genre_id');
-        });
+        // Schema::table('movies', function (Blueprint $table) {
+        //     $table->dropForeign(['genre_id']);
+        //     $table->dropColumn('genre_id');
+        // });
     }
 }

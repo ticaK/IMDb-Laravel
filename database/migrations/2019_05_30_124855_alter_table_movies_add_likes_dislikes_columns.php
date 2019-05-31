@@ -25,7 +25,7 @@ class AlterTableMoviesAddLikesDislikesColumns extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::dropIfExists('movies');        
+    { 
+        Schema::dropIfExists('movies');    
     }
 }

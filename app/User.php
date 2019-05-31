@@ -6,6 +6,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Movie;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -39,6 +40,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
+    public function movies(){
+        return $this->belongsToMany(Movie::class, 'movies_users');
+    }
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *

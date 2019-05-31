@@ -15,8 +15,11 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $title = $request->input('title');
-        
-        return Movie::search($title);
+        $query = Movie::search($title);
+
+        return $query->with(['users'])->paginate(10);
+
+
     }
 
     public function store(Request $request)
@@ -26,7 +29,7 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        return Movie::with(['genre'])->findOrFail($id);
+        return Movie::with(['genre','users'])->findOrFail($id);
     }
 
     public function update(Request $request, $id)
