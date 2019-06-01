@@ -19,7 +19,6 @@ class MovieController extends Controller
 
         return $query->with(['users'])->paginate(10);
 
-
     }
 
     public function store(Request $request)
@@ -43,5 +42,11 @@ class MovieController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addUser(Request $request)
+    {
+        $movie = Movie::find($request->movie_id);
+        $movie->users()->attach($request->user_id);
     }
 }
