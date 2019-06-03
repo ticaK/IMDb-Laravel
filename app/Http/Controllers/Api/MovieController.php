@@ -15,10 +15,13 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $title = $request->input('title');
+        $genre = $request->input('genre');
         $query = Movie::search($title);
 
-        return $query->with(['users'])->paginate(10);
-
+        return $query
+            ->with(['users','genre'])
+            ->join('genres', 'genres.id', '=', 'movies.genre_id')
+            ->where('name','like','%'.$genre.'%')->paginate(10);
     }
 
     public function store(Request $request)
