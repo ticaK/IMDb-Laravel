@@ -35,8 +35,8 @@ class MovieController extends Controller
     {
         $movie = Movie::findOrFail($id);
         $movie->update($request->all());
-        
-        return $movie;
+
+        return Movie::with(['genre','users'])->findOrFail($id);
     }
 
     public function destroy($id)
