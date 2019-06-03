@@ -26,3 +26,4 @@ Route::group([
 
 Route::apiResource('movies', 'Api\MovieController');
 Route::post('add', 'Api\MovieController@addUser');
+Route::get('genres','Api\MovieController@getAllGenres');

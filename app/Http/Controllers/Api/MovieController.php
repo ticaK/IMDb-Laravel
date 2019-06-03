@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Movie;
+use App\Genre;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -51,5 +53,10 @@ class MovieController extends Controller
     {
         $movie = Movie::find($request->movie_id);
         $movie->users()->attach($request->user_id);
+    }
+
+    public function getAllGenres() {
+        $genres = DB::table('genres')->select('name')->get();
+        return $genres;
     }
 }
