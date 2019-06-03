@@ -20,6 +20,9 @@ $factory->define(App\Movie::class, function (Faker $faker) {
         'image_url' => $faker->imageUrl(640, 480),
         'genre_id' => function() {
             return App\Genre::all()->random()->id;
-        }
+        },
+        'likes' => $faker->numberBetween(1, 100),
+        'dislikes' => $faker->numberBetween(1, 100)
+
     ];
 });
