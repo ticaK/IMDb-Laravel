@@ -22,7 +22,8 @@ $factory->define(App\Movie::class, function (Faker $faker) {
             return App\Genre::all()->random()->id;
         },
         'likes' => $faker->numberBetween(1, 100),
-        'dislikes' => $faker->numberBetween(1, 100)
+        'dislikes' => $faker->numberBetween(1, 100),
+        'views' => $faker->numberBetween(100, 1000)
 
     ];
 });

@@ -8,7 +8,7 @@ use App\User;
 
 class Movie extends Model
 {
-    protected $fillable = ['title', 'description', 'image_url', 'genre_id', 'likes', 'dislikes'];
+    protected $fillable = ['title', 'description', 'image_url', 'genre_id', 'likes', 'dislikes','views'];
 
     public function genre(){
         return $this->belongsTo(Genre::class);
