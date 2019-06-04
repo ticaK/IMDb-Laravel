@@ -29,5 +29,3 @@ Route::post('add', 'Api\MovieController@addUser');
 Route::get('genres','Api\MovieController@getAllGenres');
 Route::post('movies/{id}/addComment', 'Api\CommentsController@store');
 Route::get('popular', 'Api\MovieController@getPopular');
-
-
