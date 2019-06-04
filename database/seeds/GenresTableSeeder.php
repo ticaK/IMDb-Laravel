@@ -10,8 +10,14 @@ class GenresTableSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
-    {
-        factory(Genre::class, 1)->create();     
-    }
+    { 
+        $genres = ['drama','comedy','thriller','crime','fantasy','action','horor','western'];
+        foreach($genres as $genre){
+            factory(App\Genre::class,1)->create([
+                'name'=>$genre
+            ]);
+        }
+    }     
 }
