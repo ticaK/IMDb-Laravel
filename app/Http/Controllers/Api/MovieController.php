@@ -23,7 +23,7 @@ class MovieController extends Controller
         if($genre){
            $query->join('genres', 'movies.genre_id', '=', 'genres.id')
            ->select('movies.id as id', 'movies.*', 'genres.name')
-           ->where('genres.name', '=', $genre)->get();
+           ->where('genres.name', '=', $genre);
         }
 
         return $query->with(['users'])->paginate(10);
@@ -59,7 +59,6 @@ class MovieController extends Controller
     }
 
     public function getAllGenres() {
-        $genres = DB::table('genres')->select('name')->get();
-        return $genres;
+        return Genre::select('name')->get();      
     }
 }
