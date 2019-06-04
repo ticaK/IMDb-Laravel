@@ -14,10 +14,12 @@ class CommentsController extends Controller
     }
 
     public function store(CreateCommentRequest $request, $id) {
-        return Comment::create([
+        $newComment =  Comment::create([
             'text' => $request->text,
             'user_id' => auth()->user()->id,
             'movie_id' => $id
         ]);
+
+       return Comment::with('user')->find($newComment->id);
     } 
 }
