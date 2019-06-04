@@ -20,10 +20,13 @@ class MovieController extends Controller
         $genre = $request->input('genre');
         $query = Movie::search($title);
 
-        return $query
-            ->with(['users','genre'])
-            ->join('genres', 'genres.id', '=', 'movies.genre_id')
-            ->where('name','like','%'.$genre.'%')->paginate(10);
+        if($genre){
+           $query->join('genres', 'movies.genre_id', '=', 'genres.id')
+           ->select('movies.id as id', 'movies.*', 'genres.name')
+           ->where('genres.name', '=', $genre)->get();
+        }
+
+        return $query->with(['users'])->paginate(10);
     }
 
     public function store(Request $request)
