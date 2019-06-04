@@ -36,7 +36,7 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        return Movie::with(['genre','users'])->findOrFail($id);
+        return Movie::with(['genre','users','comments','comments.user'])->findOrFail($id);
     }
 
     public function update(Request $request, $id)

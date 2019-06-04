@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Movie;
+use App\Comment;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -42,6 +43,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function movies(){
         return $this->belongsToMany(Movie::class, 'movies_users');
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.

@@ -26,4 +26,8 @@ class Movie extends Model
 
         return $query;
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

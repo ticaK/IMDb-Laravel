@@ -1,0 +1,23 @@
+<?php
+use Faker\Generator as Faker;
+/*
+|--------------------------------------------------------------------------
+| Model Factories
+|--------------------------------------------------------------------------
+|
+| This directory should contain each of the model factory definitions for
+| your application. Factories provide a convenient way to generate new
+| model instances for testing / seeding your application's database.
+|
+*/
+$factory->define(App\Comment::class, function(Faker $faker){
+    return [
+        'text' => $faker->text(100),
+        'movie_id' => function() {
+            return App\Movie::all()->random()->id;
+        },
+        'user_id' => function() {
+            return App\User::all()->random()->id;
+        }
+    ];
+});
