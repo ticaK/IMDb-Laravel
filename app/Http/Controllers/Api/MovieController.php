@@ -61,4 +61,8 @@ class MovieController extends Controller
     public function getAllGenres() {
         return Genre::select('name')->get();      
     }
+
+    public function getPopular() {
+        return Movie::orderBy('likes','desc')->limit(10)->get();
+    }
 }
