@@ -65,4 +65,15 @@ class MovieController extends Controller
     public function getPopular() {
         return Movie::orderBy('likes','desc')->limit(10)->get();
     }
+
+    public function getRelated($id) {
+       $genre = Movie::findOrFail($id)->genre()->get();
+
+       return Movie::join('genres', 'movies.genre_id', '=', 'genres.id')
+                   ->select('movies.id as id','movies.*', 'genres.name')
+                   ->where('genres.name', '=',$genre[0]->name)
+                   ->where('movies.id','<>', $id)
+                   ->limit(10)
+                   ->get();
+    }
 }
