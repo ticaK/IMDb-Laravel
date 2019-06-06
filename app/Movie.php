@@ -30,4 +30,9 @@ class Movie extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+
+    public function watchUsers(){
+        return $this->belongsToMany(User::class,'watchlists')
+                    ->withPivot('movie_id','user_id','watched'); 
+    }
 }
