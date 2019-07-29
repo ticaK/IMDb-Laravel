@@ -26,7 +26,7 @@ class MovieController extends Controller
            ->where('genres.name', '=', $genre);
         }
 
-        return $query->with(['users'])->paginate(10);
+        return $query->with(['users','watchUsers'])->paginate(10);
     }
 
     public function store(Request $request)
@@ -36,7 +36,7 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        return Movie::with(['genre','users','comments','comments.user'])->findOrFail($id);
+        return Movie::with(['genre','users','watchUsers','comments','comments.user'])->findOrFail($id);
     }
 
     public function update(Request $request, $id)
@@ -76,5 +76,4 @@ class MovieController extends Controller
                    ->limit(10)
                    ->get();
     }
-
 }
