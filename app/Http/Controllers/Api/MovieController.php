@@ -67,13 +67,16 @@ class MovieController extends Controller
     }
 
     public function getRelated($id) {
-       $genre = Movie::findOrFail($id)->genre()->get();
-
-       return Movie::join('genres', 'movies.genre_id', '=', 'genres.id')
-                   ->select('movies.id as id','movies.*', 'genres.name')
-                   ->where('genres.name', '=',$genre[0]->name)
-                   ->where('movies.id','<>', $id)
-                   ->limit(10)
-                   ->get();
-    }
+    
+        return Movie::join('genres', 'movies.genre_id', '=', 'genres.id')
+                ->join('movies as mov2','mov2.genre_id', '=', 'genres.id')
+                ->where('movies.genre_id', function($query) use ($id){
+                     $query->where('mov2.id', '=', $id)
+                           ->select('movies.genre_id');         
+                })
+                ->where('movies.id', '<>', $id)      
+                ->select('movies.id as id','movies.*', 'genres.name')
+                ->limit(10)
+                ->get();
+ } 
 }
